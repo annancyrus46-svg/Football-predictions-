@@ -7,18 +7,25 @@ fetch("https://api.football-data.org/v4/matches", {
 })
 .then(response => response.json())
 .then(data => {
-  console.log(data);
-
   const container = document.getElementById("matches");
 
+  container.innerHTML = "";
+
   data.matches.forEach(match => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <h3>${match.homeTeam.name} vs ${match.awayTeam.name}</h3>
-      <p>${new Date(match.utcDate).toLocaleString()}</p>
-      <hr>
+    const home = match.homeTeam.name;
+    const away = match.awayTeam.name;
+    const time = new Date(match.utcDate).toLocaleString();
+
+    container.innerHTML += `
+      <div style="border:1px solid #ddd;padding:10px;margin:10px 0;border-radius:8px;">
+        <h3>${home} vs ${away}</h3>
+        <p>${time}</p>
+      </div>
     `;
-    container.appendChild(div);
   });
 })
-.catch(error => console.error(error));
+.catch(error => {
+  console.error(error);
+  document.getElementById("matches").innerHTML =
+    "<p>Unable to load matches.</p>";
+});
