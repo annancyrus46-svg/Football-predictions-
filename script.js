@@ -1,4 +1,4 @@
-const API_KEY = 2a621536be1547389e1f2f3446a71953;
+const API_KEY =  2a621536be1547389e1f2f3446a71953;
 
 fetch("https://api.football-data.org/v4/matches", {
   headers: {
